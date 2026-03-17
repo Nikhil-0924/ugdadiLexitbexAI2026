@@ -7,19 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Tiro+Telugu&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --saf:#FF6200;
-  --amber:#FFAA00;
-  --gold:#FFD700;
-  --rose:#FF2D78;
-  --violet:#BF00FF;
-  --sky:#00C8FF;
-  --teal:#00E5B0;
+  --saf:#FF6200;--amber:#FFAA00;--gold:#FFD700;
+  --rose:#FF2D78;--violet:#BF00FF;--sky:#00C8FF;--teal:#00E5B0;
   --dark:#050510;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{background:var(--dark);font-family:'Poppins',sans-serif;color:#fff;min-height:100vh;overflow-x:hidden;text-align:center;}
 
-/* BG */
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
     radial-gradient(ellipse 100% 55% at 50% -5%,rgba(255,98,0,.38) 0%,transparent 58%),
@@ -44,31 +38,23 @@ body{background:var(--dark);font-family:'Poppins',sans-serif;color:#fff;min-heig
     radial-gradient(1px   1px   at 82% 12%, #fff    0,transparent 100%);}
 @keyframes twinkle{from{opacity:.5}to{opacity:1}}
 
-/* Petals */
-.petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-.petal{position:absolute;top:-40px;animation:petalFall linear infinite;}
-@keyframes petalFall{0%{transform:translateY(-40px) rotate(0) scale(1);opacity:.9;}100%{transform:translateY(110vh) rotate(540deg) scale(.6);opacity:0;}}
+/* Falling items */
+.petals{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+.fall-item{position:absolute;top:0;animation:fallDown linear infinite;display:flex;align-items:center;justify-content:center;}
+@keyframes fallDown{0%{transform:translateY(-80px) rotate(0deg);opacity:1;}100%{transform:translateY(105vh) rotate(400deg);opacity:0;}}
 
-/* Confetti */
 .confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden;}
 .conf-piece{position:absolute;border-radius:2px;opacity:0;animation:confBurst .9s cubic-bezier(.22,1,.36,1) forwards;}
 @keyframes confBurst{0%{transform:translate(-50%,-50%) rotate(0) scale(0);opacity:1;}60%{opacity:.9;}100%{transform:translate(var(--tx),var(--ty)) rotate(var(--rot)) scale(var(--sc));opacity:0;}}
 
-/* PAGE */
-.page{position:relative;z-index:1;max-width:430px;margin:0 auto;padding:0 14px 100px;}
+.page{position:relative;z-index:2;max-width:430px;margin:0 auto;padding:0 14px 100px;}
 
 /* SPLASH */
-.splash{position:fixed;inset:0;z-index:400;
-  background:radial-gradient(ellipse 120% 120% at 50% 50%,#12002A 0%,#050510 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
-  animation:splashOut .7s 2.6s forwards;}
+.splash{position:fixed;inset:0;z-index:400;background:radial-gradient(ellipse 120% 120% at 50% 50%,#12002A 0%,#050510 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;animation:splashOut .7s 2.6s forwards;}
 @keyframes splashOut{to{opacity:0;pointer-events:none;visibility:hidden;}}
 .splash-rangoli{animation:rangoliSpin 1.5s cubic-bezier(.22,1,.36,1) both;}
 @keyframes rangoliSpin{from{transform:scale(0) rotate(-180deg);opacity:0;}to{transform:scale(1) rotate(0);opacity:1;}}
-.splash-t1{font-family:'Yatra One',cursive;font-size:1.8rem;
-  background:linear-gradient(135deg,#FF6200,#FFD700,#FF2D78);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:fadeUp .8s .9s both;}
+.splash-t1{font-family:'Yatra One',cursive;font-size:1.8rem;background:linear-gradient(135deg,#FF6200,#FFD700,#FF2D78);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeUp .8s .9s both;}
 .splash-t2{font-size:12px;color:rgba(255,255,255,.55);animation:fadeUp .8s 1.1s both;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
@@ -76,32 +62,13 @@ body{background:var(--dark);font-family:'Poppins',sans-serif;color:#fff;min-heig
 header{text-align:center;padding:30px 0 12px;animation:fadeUp .8s both;}
 .lamp{font-size:2.4rem;display:block;margin-bottom:6px;animation:lampGlow 2s ease-in-out infinite alternate;}
 @keyframes lampGlow{from{filter:drop-shadow(0 0 8px rgba(255,170,0,.7));}to{filter:drop-shadow(0 0 24px rgba(255,98,0,1));}}
-.badge-strip{
-  display:inline-flex;align-items:center;gap:6px;
-  background:linear-gradient(135deg,#FF6200,#FFAA00);
-  color:#000;font-size:10px;font-weight:800;letter-spacing:2px;
-  padding:5px 18px;border-radius:30px;margin-bottom:10px;text-transform:uppercase;
-  box-shadow:0 4px 22px rgba(255,98,0,.7);}
-header h1{
-  font-family:'Yatra One',cursive;font-size:2.7rem;line-height:1.1;
-  background:linear-gradient(135deg,#FF6200 0%,#FFD700 35%,#FF2D78 65%,#BF00FF 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 22px rgba(255,170,0,.7));}
+.badge-strip{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FF6200,#FFAA00);color:#000;font-size:10px;font-weight:800;letter-spacing:2px;padding:5px 18px;border-radius:30px;margin-bottom:10px;text-transform:uppercase;box-shadow:0 4px 22px rgba(255,98,0,.7);}
+header h1{font-weight:800; font-family:'Yatra One',cursive;font-size:1.8rem;line-height:1.1;background:linear-gradient(135deg,#FF6200 0%,#FFD700 35%,#FF2D78 65%,#BF00FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 22px rgba(255,170,0,.7));}
 .header-tel{font-family:'Tiro Telugu',serif;font-size:13px;color:rgba(255,255,255,.7);margin-top:5px;}
-.samvat{
-  display:inline-block;margin-top:10px;
-  background:linear-gradient(135deg,rgba(255,98,0,.3),rgba(255,215,0,.25));
-  border:2px solid rgba(255,170,0,.7);
-  border-radius:30px;padding:6px 20px;
-  font-size:12px;font-weight:700;color:#FFD700;
-  box-shadow:0 0 18px rgba(255,170,0,.35);}
+.samvat{display:inline-block;margin-top:10px;background:linear-gradient(135deg,rgba(255,98,0,.3),rgba(255,215,0,.25));border:2px solid rgba(255,170,0,.7);border-radius:30px;padding:6px 20px;font-size:12px;font-weight:700;color:#FFD700;box-shadow:0 0 18px rgba(255,170,0,.35);}
 
 /* RITUAL */
-.ritual-card{
-  background:linear-gradient(135deg,rgba(255,98,0,.22),rgba(255,215,0,.14));
-  border:2px solid rgba(255,170,0,.6);
-  border-radius:20px;padding:14px 14px 12px;margin:16px 0 10px;
-  box-shadow:0 0 24px rgba(255,98,0,.2);}
+.ritual-card{background:linear-gradient(135deg,rgba(255,98,0,.22),rgba(255,215,0,.14));border:2px solid rgba(255,170,0,.6);border-radius:20px;padding:14px 14px 12px;margin:16px 0 10px;box-shadow:0 0 24px rgba(255,98,0,.2);}
 .ritual-title{font-family:'Yatra One',cursive;font-size:13px;color:#FFD700;margin-bottom:10px;text-shadow:0 0 12px rgba(255,215,0,.7);}
 .ritual-items{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;}
 .ritem{background:rgba(255,255,255,.12);border:1px solid rgba(255,170,0,.45);border-radius:20px;padding:5px 12px;font-size:11px;color:#fff;display:flex;align-items:center;gap:4px;}
@@ -110,8 +77,7 @@ header h1{
 /* SCORES */
 .score-strip{display:flex;gap:9px;margin:10px 0 8px;}
 .sbox{flex:1;text-align:center;background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.05));border:2px solid rgba(255,170,0,.5);border-radius:16px;padding:10px 4px;backdrop-filter:blur(8px);}
-.sbox .val{font-size:1.5rem;font-weight:800;line-height:1;display:block;
-  background:linear-gradient(135deg,#FF6200,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sbox .val{font-size:1.5rem;font-weight:800;line-height:1;display:block;background:linear-gradient(135deg,#FF6200,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .sbox .val.pop{animation:scorePop .4s cubic-bezier(.22,1,.36,1);}
 @keyframes scorePop{0%{transform:scale(1)}50%{transform:scale(1.45)}100%{transform:scale(1)}}
 .sbox .lbl{font-size:8.5px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;margin-top:2px;}
@@ -127,39 +93,25 @@ header h1{
 .tdot{font-size:8.5px;color:rgba(255,255,255,.35);text-align:center;flex:1;line-height:1.4;transition:color .3s,transform .3s;}
 .tdot.on{color:#FFD700;transform:scale(1.2);}
 
-/* PROGRESS */
 .prog-wrap{background:rgba(255,255,255,.1);border-radius:20px;height:7px;margin-bottom:8px;overflow:hidden;}
 .prog-bar{height:100%;border-radius:20px;width:0%;background:linear-gradient(90deg,#FF6200,#FFD700,#FF2D78);transition:width .7s cubic-bezier(.22,1,.36,1);box-shadow:0 0 14px rgba(255,170,0,.8);}
-
-/* HINT */
 .hint{text-align:center;font-size:12px;color:rgba(255,255,255,.55);margin-bottom:12px;}
 .hint span{color:#FFD700;font-weight:700;}
 
-/* CELEBRATE */
 .celebrate{background:linear-gradient(135deg,rgba(255,215,0,.22),rgba(255,98,0,.18));border:2px solid rgba(255,215,0,.8);border-radius:20px;padding:18px;margin-bottom:14px;display:none;box-shadow:0 0 32px rgba(255,170,0,.5);}
 .celebrate.show{display:block;animation:fadeUp .6s both;}
 .celebrate h3{font-family:'Yatra One',cursive;font-size:1.25rem;background:linear-gradient(135deg,#FF6200,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .celebrate p{font-size:12px;color:rgba(255,255,255,.85);margin-top:5px;}
 
-/* GRID */
+/* GRID — exact doc2 style */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;}
-.rashi-card{
-  background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.04));
-  border:2px solid rgba(255,170,0,.4);
-  border-radius:20px;padding:14px 8px 12px;
-  text-align:center;cursor:pointer;
-  transition:transform .2s,border-color .2s,box-shadow .2s;
-  position:relative;overflow:hidden;backdrop-filter:blur(6px);}
-.rashi-card::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% -10%,rgba(255,215,0,.22) 0%,transparent 65%);
-  opacity:0;transition:opacity .3s;}
+.rashi-card{background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.04));border:2px solid rgba(255,170,0,.4);border-radius:20px;padding:14px 8px 12px;text-align:center;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden;backdrop-filter:blur(6px);}
+.rashi-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% -10%,rgba(255,215,0,.22) 0%,transparent 65%);opacity:0;transition:opacity .3s;}
 .rashi-card:hover::before,.rashi-card.active::before{opacity:1;}
 .rashi-card:active{transform:scale(.91);}
 .rashi-card.revealed{border-color:rgba(0,229,176,.9);box-shadow:0 0 20px rgba(0,229,176,.5);}
 .rashi-card.active{border-color:#FFD700;box-shadow:0 0 30px rgba(255,215,0,.7);}
-.rashi-img-wrap{width:56px;height:56px;margin:0 auto 6px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,170,0,.25) 0%,transparent 70%);
-  display:flex;align-items:center;justify-content:center;transition:transform .3s;}
+.rashi-img-wrap{width:56px;height:56px;margin:0 auto 6px;border-radius:50%;background:radial-gradient(circle,rgba(255,170,0,.25) 0%,transparent 70%);display:flex;align-items:center;justify-content:center;transition:transform .3s;}
 .rashi-card:hover .rashi-img-wrap,.rashi-card.active .rashi-img-wrap{transform:scale(1.2) rotate(-6deg);}
 .rashi-img-wrap svg{width:44px;height:44px;}
 .rashi-name{font-family:'Yatra One',cursive;font-size:11px;color:#FFD700;line-height:1.2;text-shadow:0 0 8px rgba(255,215,0,.6);}
@@ -175,17 +127,11 @@ header h1{
 .modal-body{padding:18px 18px 0;}
 .handle{width:40px;height:4px;background:rgba(255,255,255,.22);border-radius:4px;margin:0 auto 16px;}
 .m-head{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
-.m-img-circle{width:68px;height:68px;flex-shrink:0;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,170,0,.28),rgba(255,45,120,.18));
-  border:2px solid rgba(255,215,0,.6);
-  display:flex;align-items:center;justify-content:center;
-  animation:emojiPop .6s cubic-bezier(.22,1,.36,1) both;
-  box-shadow:0 0 22px rgba(255,170,0,.45);}
+.m-img-circle{width:68px;height:68px;flex-shrink:0;border-radius:50%;background:radial-gradient(circle,rgba(255,170,0,.28),rgba(255,45,120,.18));border:2px solid rgba(255,215,0,.6);display:flex;align-items:center;justify-content:center;animation:emojiPop .6s cubic-bezier(.22,1,.36,1) both;box-shadow:0 0 22px rgba(255,170,0,.45);}
 .m-img-circle svg{width:46px;height:46px;}
 @keyframes emojiPop{0%{transform:scale(0) rotate(-20deg);}70%{transform:scale(1.15) rotate(6deg);}100%{transform:scale(1) rotate(0);}}
 .m-title{font-family:'Yatra One',cursive;font-size:1.35rem;color:#FFD700;text-shadow:0 0 14px rgba(255,215,0,.7);}
 .m-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px;}
-.m-period{font-size:11px;color:#FF6200;font-weight:700;margin-top:2px;}
 .star-row{display:flex;gap:5px;justify-content:flex-start;margin:8px 0 12px;}
 .star-i{font-size:18px;animation:starPop .3s cubic-bezier(.22,1,.36,1) both;}
 @keyframes starPop{from{transform:scale(0)}to{transform:scale(1)}}
@@ -204,8 +150,6 @@ header h1{
 .pred-txt{font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.92);}
 .close-btn{width:100%;margin-top:20px;padding:15px;background:linear-gradient(135deg,#FF6200,#FFD700);color:#000;font-weight:800;font-size:15px;border:none;border-radius:18px;cursor:pointer;font-family:'Poppins',sans-serif;transition:transform .15s;box-shadow:0 6px 26px rgba(255,98,0,.6);}
 .close-btn:active{transform:scale(.97);}
-
-/* DIYAS */
 .diya-row{display:flex;justify-content:center;gap:14px;padding:26px 0 4px;}
 .diya{font-size:1.6rem;animation:dyaFlicker 1.8s ease-in-out infinite alternate;}
 .diya:nth-child(2){animation-delay:.4s;}.diya:nth-child(3){animation-delay:.8s;}.diya:nth-child(4){animation-delay:.3s;}.diya:nth-child(5){animation-delay:.6s;}
@@ -230,20 +174,17 @@ footer span{color:#FF6200;}
       <ellipse cx="0" cy="-45" rx="10" ry="23" fill="#BF00FF" opacity=".95" transform="rotate(315)"/>
       <circle r="26" fill="none" stroke="#FFD700" stroke-width="2.5" stroke-dasharray="7 4"/>
       <circle r="16" fill="rgba(255,98,0,.35)" stroke="#FF6200" stroke-width="2"/>
-      <circle cx="0" cy="-26" r="3.5" fill="#FFD700"/>
-      <circle cx="26" cy="0"  r="3.5" fill="#FFD700"/>
-      <circle cx="0"  cy="26" r="3.5" fill="#FFD700"/>
-      <circle cx="-26" cy="0" r="3.5" fill="#FFD700"/>
+      <circle cx="0" cy="-26" r="3.5" fill="#FFD700"/><circle cx="26" cy="0" r="3.5" fill="#FFD700"/>
+      <circle cx="0" cy="26" r="3.5" fill="#FFD700"/><circle cx="-26" cy="0" r="3.5" fill="#FFD700"/>
       <circle r="10" fill="#FF6200"/>
       <text y="4" text-anchor="middle" font-size="10" fill="#fff" font-family="'Yatra One',cursive" font-weight="700">ఉ</text>
     </g>
   </svg>
-  <div class="splash-t1">ఉగాది శుభాకాంక్షలు 🌸</div>
+  <div class="splash-t1"><h4>ఉగాది శుభాకాంక్షలు 🌸</h4></div>
   <div class="splash-t2">Ugadi 2026 · శ్రీ పరాభవ నామ సంవత్సరం</div>
 </div>
 
-<div class="bg"></div>
-<div class="stars"></div>
+<div class="bg"></div><div class="stars"></div>
 <div class="petals" id="petals-rain"></div>
 <div class="confetti-wrap" id="confetti"></div>
 
@@ -316,7 +257,6 @@ footer span{color:#FF6200;}
         <div style="text-align:left">
           <div class="m-title" id="m-title"></div>
           <div class="m-sub"   id="m-sub"></div>
-          <div class="m-period">📅 Mar 2026 – Mar 2027</div>
         </div>
       </div>
       <div class="star-row" id="m-stars"></div>
@@ -330,7 +270,7 @@ footer span{color:#FF6200;}
 </div>
 
 <script>
-/* ── SVG ZODIAC IMAGES ── */
+/* ── SVG ZODIAC ICONS — exact doc2 style (circle + glow ring + symbol) ── */
 const ZS={
 aries:`<svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
   <circle cx="30" cy="30" r="28" fill="rgba(255,98,0,.18)" stroke="#FF6200" stroke-width="1.8"/>
@@ -542,20 +482,36 @@ const rashis=[
  tip:"Two fish in cosmic waters — 2026 flows entirely in your favour. Surrender to the beautiful current. 🌊🐟"}
 ];
 
-/* ── INIT ── */
-let revealed=new Set(),score=0,streak=0;
+/* ── FALLING ITEMS — from doc3 exactly ── */
+const fallItems=[
+  {h:'<svg viewBox="0 0 30 30" width="26" height="26"><circle cx="15" cy="15" r="4" fill="#FFD700"/><ellipse cx="15" cy="8" rx="4" ry="6" fill="#FF6EB4"/><ellipse cx="15" cy="22" rx="4" ry="6" fill="#FF6EB4"/><ellipse cx="8" cy="15" rx="6" ry="4" fill="#FF90C8"/><ellipse cx="22" cy="15" rx="6" ry="4" fill="#FF90C8"/><ellipse cx="10" cy="10" rx="4" ry="5" fill="#FFB0D8" transform="rotate(45,10,10)"/><ellipse cx="20" cy="20" rx="4" ry="5" fill="#FFB0D8" transform="rotate(45,20,20)"/><ellipse cx="20" cy="10" rx="4" ry="5" fill="#FFB0D8" transform="rotate(-45,20,10)"/><ellipse cx="10" cy="20" rx="4" ry="5" fill="#FFB0D8" transform="rotate(-45,10,20)"/></svg>',sz:26},
+  {h:'<svg viewBox="0 0 28 28" width="24" height="24"><circle cx="14" cy="14" r="3.5" fill="#FFA500"/><ellipse cx="14" cy="7" rx="3.5" ry="5.5" fill="#FF4500"/><ellipse cx="14" cy="21" rx="3.5" ry="5.5" fill="#FF4500"/><ellipse cx="7" cy="14" rx="5.5" ry="3.5" fill="#FF6600"/><ellipse cx="21" cy="14" rx="5.5" ry="3.5" fill="#FF6600"/><ellipse cx="9" cy="9" rx="3.5" ry="5" fill="#FF7722" transform="rotate(45,9,9)"/><ellipse cx="19" cy="19" rx="3.5" ry="5" fill="#FF7722" transform="rotate(45,19,19)"/></svg>',sz:24},
+  {h:'<svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="3" fill="#FFE040"/><ellipse cx="12" cy="6" rx="3" ry="4.5" fill="#FFF176"/><ellipse cx="12" cy="18" rx="3" ry="4.5" fill="#FFF176"/><ellipse cx="6" cy="12" rx="4.5" ry="3" fill="#FFEE58"/><ellipse cx="18" cy="12" rx="4.5" ry="3" fill="#FFEE58"/></svg>',sz:20},
+  {h:'<svg viewBox="0 0 28 34" width="22" height="28"><ellipse cx="14" cy="20" rx="9" ry="13" fill="#8BC34A"/><ellipse cx="14" cy="19" rx="7" ry="10" fill="#CDDC39"/><path d="M14 7 Q16 3 14 0 Q12 3 14 7" stroke="#558B2F" stroke-width="2" fill="#4CAF50"/><ellipse cx="10" cy="21" rx="3" ry="6" fill="#AED581" opacity=".5"/></svg>',sz:24},
+  {h:'<svg viewBox="0 0 34 30" width="30" height="26"><line x1="17" y1="30" x2="17" y2="14" stroke="#388E3C" stroke-width="2.5"/><line x1="17" y1="22" x2="9" y2="12" stroke="#388E3C" stroke-width="2"/><line x1="17" y1="17" x2="25" y2="10" stroke="#388E3C" stroke-width="2"/><ellipse cx="7" cy="10" rx="6" ry="3.5" fill="#4CAF50" transform="rotate(-20,7,10)"/><ellipse cx="27" cy="8" rx="6" ry="3.5" fill="#4CAF50" transform="rotate(20,27,8)"/><ellipse cx="17" cy="6" rx="6" ry="3.5" fill="#66BB6A"/><ellipse cx="10" cy="4" rx="5" ry="3" fill="#4CAF50" transform="rotate(-30,10,4)"/><ellipse cx="24" cy="3" rx="5" ry="3" fill="#4CAF50" transform="rotate(30,24,3)"/></svg>',sz:28},
+  {h:'<svg viewBox="0 0 28 24" width="24" height="20"><rect x="2" y="4" width="24" height="18" rx="4" fill="#8D4E0A"/><rect x="4" y="6" width="20" height="14" rx="3" fill="#A0621C"/><rect x="6" y="8" width="16" height="10" rx="2" fill="#C4832A" opacity=".7"/><path d="M10 16 Q14 12 18 16" stroke="#6B3A08" stroke-width="1.5" fill="none"/></svg>',sz:20},
+  {h:'<svg viewBox="0 0 16 34" width="14" height="30"><ellipse cx="8" cy="22" rx="5.5" ry="12" fill="#D32F2F"/><ellipse cx="8" cy="21" rx="3.5" ry="9" fill="#EF5350"/><path d="M8 10 Q10 5 8 1 Q6 5 8 10" stroke="#388E3C" stroke-width="2" fill="#4CAF50"/><ellipse cx="5.5" cy="17" rx="2" ry="5" fill="#EF9A9A" opacity=".45"/></svg>',sz:26},
+  {h:'<svg viewBox="0 0 34 18" width="30" height="16"><path d="M4 9 Q8 2 17 2 Q26 2 30 9 Q26 16 17 16 Q8 16 4 9Z" fill="#6D4C41"/><path d="M6 9 Q10 5 17 5 Q24 5 28 9" stroke="#4E342E" stroke-width="1.2" fill="none"/><ellipse cx="11" cy="9" rx="3" ry="3" fill="#4E342E"/><ellipse cx="17" cy="9" rx="3" ry="3" fill="#4E342E"/><ellipse cx="23" cy="9" rx="3" ry="3" fill="#4E342E"/></svg>',sz:26},
+  {h:'<svg viewBox="0 0 20 20" width="15" height="15"><rect x="2" y="2" width="16" height="16" rx="2" fill="rgba(255,255,255,.8)" stroke="rgba(180,210,255,.5)" stroke-width="1"/><rect x="5" y="5" width="10" height="10" rx="1" fill="rgba(220,240,255,.65)"/></svg>',sz:14},
+];
 
-// Petals
+/* ── BUILD FALLING ITEMS ── */
 const rain=document.getElementById('petals-rain');
-['🌸','🌺','🌼','🌸','❀'].forEach(e=>{
-  for(let i=0;i<3;i++){
-    const p=document.createElement('span');p.className='petal';p.textContent=e;
-    p.style.cssText=`left:${Math.random()*100}%;font-size:${12+Math.random()*12}px;animation-duration:${7+Math.random()*10}s;animation-delay:${Math.random()*14}s;`;
-    rain.appendChild(p);
-  }
-});
+for(let i=0;i<45;i++){
+  const item=fallItems[Math.floor(Math.random()*fallItems.length)];
+  const w=document.createElement('div');
+  w.className='fall-item';
+  w.innerHTML=item.h;
+  const dur=18+Math.random()*11;
+  w.style.left=(Math.random()*95)+'%';
+  w.style.width=item.sz+'px';
+  w.style.height=item.sz+'px';
+  w.style.animationDuration=dur+'s';
+  w.style.animationDelay=(-Math.random()*dur)+'s';
+  rain.appendChild(w);
+}
 
-// Build grid
+/* ── BUILD GRID ── */
 const grid=document.getElementById('grid');
 rashis.forEach((r,i)=>{
   const c=document.createElement('div');c.className='rashi-card';c.id='card-'+i;
@@ -566,6 +522,9 @@ rashis.forEach((r,i)=>{
   c.onclick=()=>openModal(i);
   grid.appendChild(c);
 });
+
+/* ── STATE ── */
+let revealed=new Set(),score=0,streak=0;
 
 /* ── MODAL ── */
 function openModal(i){
